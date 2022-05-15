@@ -1,4 +1,4 @@
-import bootstrap_1hz as bootstrap
+import point_labeling_functions as bootstrap
 import pandas as pd
 import itertools.product
 
