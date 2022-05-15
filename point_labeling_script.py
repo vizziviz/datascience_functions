@@ -1,4 +1,4 @@
-import point_labeling_functions as bootstrap
+import point_labeling_functions as functions
 import pandas as pd
 import itertools.product
 
@@ -17,18 +17,18 @@ def make_all_per_point_summaries(holdout_sets: list, windows: list, featuresets:
     for window, featureset, excluding in combos:
         print('Target window:', window, ', features:', featureset, ', excluding:', excluding)
             
-        features = bootstrap.get_features(featureset)
+        features = functions.get_features(featureset)
             
         for holdout_set in holdout_sets:
-            trainsets, trainparts = bootstrap.make_holdout_set(holdout_set=holdout_set, 
+            trainsets, trainparts = functions.make_holdout_set(holdout_set=holdout_set, 
                                                                excluding=excluding)
             testsets, testparts = trainsets.copy(), trainparts.copy()
                 
-            pps = bootstrap.create_avg_pps(features=features, train_sets=trainsets, test_sets=testsets,
+            pps = functions.create_avg_pps(features=features, train_sets=trainsets, test_sets=testsets,
                                            train_parts=trainparts, test_parts=testparts, 
                                            window_hrs=window, subdir = 'one_hz/')
             for testset in testsets:
-                bootstrap.filter_and_save_pps(testset=testset, pps=pps, excluding=excluding, 
+                functions.filter_and_save_pps(testset=testset, pps=pps, excluding=excluding, 
                                               featureset=featureset, holdout_set=holdout_set,
                                               window_hrs=window)
 
